@@ -135,6 +135,7 @@
                     <input tabindex="20"
                         type="checkbox"
                         name="ready"
+                        id="ready"
                         @if (isset($contact->ready) && $contact->ready == 1)
                             checked
                         @endif                   
@@ -142,6 +143,7 @@
                     <input tabindex="21"
                         type="checkbox"
                         name="buyer"
+                        id="buyer"
                         @if (isset($contact->buyer) && $contact->buyer == 1)
                             checked
                         @endif                   
@@ -172,8 +174,7 @@
             <a href="{{ url('database/add') }}"><div id="conbtnfirst" class="conbtnfirst">Add new </div>  </a>
             <div id="conbtnfirst" class="conbtn" onclick="return(contactedit());">Save changes </div>
             <a href="{{ url('database/remove/'.$contact->id) }}"><div id="conbtnfirst" class="conbtn" onclick="return(conremove());">Remove</div> </a>
-            <a href="{{ url('database/dup/'.$contact->id) }}"><div id="conbtnfirst" class="conbtn" onclick="return(condup());">Duplicate</div> </a>
-            
+            <div id="conbtnfirst" class="conbtn" onclick="return(condup());">Duplicate </div>           
             <div>
                 <a href="{{url('database/'.$contact->id).'/previous'}}"><div id="rleft" class="routescl conbtn"><span class="glyphicon glyphicon-chevron-left"></span></div></a>
                 <div id="rcenter" class="conbtn routescl">Go contact</div>
@@ -206,10 +207,52 @@
 <script type="text/javascript" src="{{ asset('assets/js/jquery-2.1.1.js') }}"></script>
 <script>
 
+function conremove(){
+    @if(auth()->user()->remove)
+        var r=confirm("Do you want to remove this contact?");
+        if (r==true)
+            return true;
+        else
+            return false;
+    @else
+        var r=confirm("You're not allowed to remove records")
+        return false;
+    @endif
+
+}
+
+function condup(){    
+    @if(auth()->user()->create)
+        var r=confirm("Do you want to duplicate this contact?");
+        if (r==true){
+            $('#first_name').val('');
+            $('#last_name').val('');
+            $('#job').val('');
+            $('#direct_phone').val('');
+            $('#mobile_phone_a').val('');
+            $('#mobile_phone_b').val('');
+            $('#work_email').val('');
+            $('#personal_email').val('');
+            $('#li').val('');
+            $('#jeffcode').val('');
+            $('#ready').prop( "checked", false );
+            $('#buyer').prop( "checked", false );
+            $('#notes').val('');
+            $('#contact_edit_from').attr('action', "{{ url('database/add')}}");
+            $( "#contact_edit_from" ).submit();
+        }
+        else
+            return false;
+    @else
+        var r=confirm("You're not allowed to duplicate records")
+        return false;
+    @endif
+}
+
 @if (isset($contact))
     function contactedit(){
         @if(auth()->user()->edit)
-            var r=confirm("Do you want to edit this contact?")
+            var r=confirm("Do you want to edit this contact?");
             if (r==true)
                 $( "#contact_edit_from" ).submit();
             else
@@ -231,16 +274,17 @@
                 alert('Please type Ad ID correctly.');
             }
     });
+
 @else
     function addcont(){
-        @if(auth()->user()->remove)
-            var r=confirm("Do you want to add this contact?")
+        @if(auth()->user()->create)
+            var r=confirm("Do you want to add this contact?");
             if (r==true)
                 return true;
             else
                 return false;
         @else
-            var r=confirm("You're not allowed to remove records")
+            var r=confirm("You're not allowed to add records")
             return false;
         @endif
     }

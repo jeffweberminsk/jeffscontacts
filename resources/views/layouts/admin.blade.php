@@ -29,32 +29,6 @@
                     return false;
             }
 
-            function conremove()
-            {
-                @if(auth()->user()->edit)
-                    var r=confirm("Do you want to remove this contact?")
-                    if (r==true)
-                        return true;
-                    else
-                        return false;
-                @else
-                    var r=confirm("You're not allowed to edit records")
-                    return false;
-                @endif
-
-            }
-
-            
-            function condup()
-            {
-                //var r=confirm("Do you want to duplicate this contact?")
-                confirm("Currently disabled")
-                //if (r==true)
-                //    return true;
-                ///else
-                    return false;
-            }
-
             function conedit()
             {
                 var r=confirm("Do you want to edit this contact?")
@@ -64,16 +38,6 @@
                     return false;
             }
 
-            function fillall(){
-                var x = document.getElementById("comm").value;
-                document.getElementById("coms").value = x;
-                document.getElementById("coms1").value = x;
-                document.getElementById("coms2").value = x;
-
-                var y = document.getElementById("emw").value;
-                document.getElementById("emp").value = y;
-                document.getElementById("emd").value = y;
-            }
         </script>
 
     </head>
