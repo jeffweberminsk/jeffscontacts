@@ -72,7 +72,6 @@
 
         <input class="btn" type="submit" value="Create user">
         <a href="{{ url('/users') }}"><input class="btn" type="button" value="Cancel" style="float:right; color: #333;"></a>
-
     </form>
 </div>     
 @endsection

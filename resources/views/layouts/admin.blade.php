@@ -31,11 +31,17 @@
 
             function conremove()
             {
-                var r=confirm("Do you want to remove this contact?")
-                if (r==true)
-                    return true;
-                else
+                @if(auth()->user()->edit)
+                    var r=confirm("Do you want to remove this contact?")
+                    if (r==true)
+                        return true;
+                    else
+                        return false;
+                @else
+                    var r=confirm("You're not allowed to edit records")
                     return false;
+                @endif
+
             }
 
             
@@ -72,15 +78,18 @@
 
     </head>
     <body>
-        <div id="loader"></div><div id="menu">
+        <div id="menu">
             <a href="{{ url('') }}">
                 <div class="menuel" style="border-top-left-radius:6px;">Home</div></a>
             <a href="{{ url('database') }}">
                 <div class="menuel" >Database</div></a>
             <a href="{{ url('search') }}">
                 <div class="menuel" >Search</div></a>
+        @if(isset(auth()->user()->admin) && auth()->user()->admin)
             <a href = "{{ url('users') }}">
                 <div class="menuel">Users</div></a>
+        @endif
+
             <form method="POST" action="{{ route('logout') }}" class="home_back">
             @csrf
                 <a href="#" onClick="this.parentNode.submit()">

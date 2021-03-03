@@ -169,7 +169,7 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
 //search 
 Route::group(['prefix' => 'search','middleware' => ['auth']], function () {
     
-    //show search page without results
+    //show search page without results NOT IMPLEMENTED
     Route::get('/', function () {
         return view('search');
     });
@@ -222,6 +222,104 @@ Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
     Route::get('/', function () {
         $users = User::all();//select(['id','first_name','last_name','email','admin']);
         return view('users', ['users' => $users]);
+    });
+
+    //show edit page for adding user
+    Route::get('/add', function () {
+        return view('useredit');
+    });
+
+    //show edit page for record with given id
+    Route::get('/{id}', function ($id) {
+        $user = User::findOrFail($id);
+        return view('useredit',['user' => $user]);
+    });
+
+    //adding contact user to db
+    Route::post('/add', function (Request $request) {
+
+        $admin = false;
+        if($request['admin']){
+            $admin = true;
+            $edit = true;
+            $create = true;
+            $remove = true; 
+        }
+        else{
+            $edit = false;
+            if($request['edit'])
+                $edit = true;        
+            $create = false;
+            if($request['create'])
+                $edit = true;        
+            $remove = false;
+            if($request['remove'])
+                $remove = true;
+        }
+
+        User::create([
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'email' => $request['email'],
+            'admin' => $admin,
+            'edit' => $edit,
+            'create' => $create,
+            'remove' => $remove,
+            'password' => Hash::make($request['password']),
+        ]);
+        return redirect('users/');
+    });
+
+    //saving user changes to db
+    Route::post('/{id}', function ($id,Request $request) {
+        
+        $admin = false;
+        if($request['admin']){
+            $admin = true;
+            $edit = true;
+            $create = true;
+            $remove = true; 
+        }
+        else{
+            $edit = false;
+            if($request['edit'])
+                $edit = true;        
+            $create = false;
+            if($request['create'])
+                $create = true;        
+            $remove = false;
+            if($request['remove'])
+                $remove = true;
+        }
+
+        DB::table('users')
+        ->where('id', $id)
+        ->update(
+            [
+                'first_name' => $request['first_name'],
+                'last_name' => $request['last_name'],
+                'email' => $request['email'],
+                'admin' => $admin,
+                'edit' => $edit,
+                'create' => $create,
+                'remove' => $remove]
+        );
+
+        if ($request['password'])
+            DB::table('users')
+            ->where('id', $id)
+            ->update(
+                ['password' => Hash::make($request['password'])]
+            );
+        return redirect('users/');
+    });
+
+    //removing user from db
+    Route::get('/remove/{id}', function ($id) {
+        DB::table('users')
+        ->where('id', $id)
+        ->delete();
+        return redirect('users/');
     });
 
 });

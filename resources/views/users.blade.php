@@ -23,14 +23,14 @@
                     <td>{{ $user->email }}</td>
                     <td>
                     <input type="checkbox" name="admin"
-                        @if ($user->admin == 1)
+                        @if($user->admin == 1)
                             checked
                         @endif                   
                         disabled/>
                         </td>
                     <td>
-                        <a href="">    <button style="color:#333;" class="btn">Edit</button></a>
-                        <a href="">  <button style="color:#333;" class="btn" onclick="return(userremove());">Remove</button></a>
+                            <a href="{{ url('users/'.$user->id) }}">  <button style="color:#333;" class="btn">Edit</button></a>
+                            <a href="{{ url('users/remove/'.$user->id) }}">  <button style="color:#333;" class="btn" onclick="return(userremove());">Remove</button></a>
                     </td>
                 </tr>
             @endforeach
@@ -40,7 +40,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><button class="btn" onclick="location.href='add user'">New user</button></td>
+                    <td><a href="{{ url('users/add') }}"><button class="btn">New user</button></a></td>
                 </tr>
         </table>
 </div>

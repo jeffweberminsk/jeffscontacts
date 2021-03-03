@@ -40,17 +40,23 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         $admin = false;
-        if(isset($input['admin']))
+        if(isset($input['admin'])){
             $admin = true;
-        $edit = false;
-        if(isset($input['edit']))
-            $edit = true;        
-        $create = false;
-        if(isset($input['create']))
-            $create = true;        
-        $remove = false;
-        if(isset($input['remove']))
-            $remove = true;
+            $edit = true;
+            $create = true;
+            $remove = true; 
+        }
+        else{
+            $edit = false;
+            if(isset($input['edit']))
+                $edit = true;        
+            $create = false;
+            if(isset($input['create']))
+                $edit = true;        
+            $remove = false;
+            if(isset($input['remove']))
+                $remove = true;
+        }
 
         return User::create([
             'first_name' => $input['first_name'],

@@ -205,13 +205,19 @@
 
 <script type="text/javascript" src="{{ asset('assets/js/jquery-2.1.1.js') }}"></script>
 <script>
+
 @if (isset($contact))
     function contactedit(){
-        var r=confirm("Do you want to edit this contact?")
-        if (r==true)
-            $( "#contact_edit_from" ).submit();
-        else
+        @if(auth()->user()->edit)
+            var r=confirm("Do you want to edit this contact?")
+            if (r==true)
+                $( "#contact_edit_from" ).submit();
+            else
+                return false;
+        @else
+            var r=confirm("You're not allowed to edit records")
             return false;
+        @endif
     }
 
     $("#goto_contact").click(function(){
@@ -227,11 +233,16 @@
     });
 @else
     function addcont(){
-        var r=confirm("Do you want to add this contact?")
-        if (r==true)
-            return true;
-        else
+        @if(auth()->user()->remove)
+            var r=confirm("Do you want to add this contact?")
+            if (r==true)
+                return true;
+            else
+                return false;
+        @else
+            var r=confirm("You're not allowed to remove records")
             return false;
+        @endif
     }
 @endif
 
