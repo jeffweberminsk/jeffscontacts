@@ -1,0 +1,176 @@
+body {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1100px;
+    background-color: #F7FAFC;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* === HOME PAGE === */
+
+.home_title {
+    margin-top: 200px;
+    color: #EF3B2D;
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.home_title > span {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.home_body {
+    width: 500px;
+    height: 175px;
+    padding: 30px 40px 40px 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(92, 92, 92, 0.1);
+}
+
+.home_wrapper {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.home_icon {
+    width: 30px;
+    height: 30px;
+}
+
+.home_subtitle {
+    margin-left: 19px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.home_description {
+    margin-top: 13px;
+    margin-left: 50px;
+    font-size: 14px;
+    color: rgba(113,128,150, 0.8);
+    font-weight: 100;
+    line-height: 22px;
+}
+
+.home_button {
+    margin-top: 18px;
+    margin-left: 50px;
+    width: 120px;
+    height: 30px;
+    background-color: #EF3B2D;
+    font-family: 'Nunito', sans-serif;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgba(92, 92, 92, 0.2);
+}
+.home_button:hover {
+    background-color: #A0AEC0;
+}
+
+.footer_description {
+    margin-top: 15px;
+    margin-left: 435px;
+    font-size: 14px;
+    color: rgba(113,128,150, 0.6);
+    font-weight: 100;
+}
+
+
+/* === LOGIN PANEL === */
+
+.login_title {
+    margin-top: 100px;
+    color: #EF3B2D;
+    font-size: 45px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.login_wrapper {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.login_body {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 200px;
+    height: 250px;
+    padding: 40px 40px 40px 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(92, 92, 92, 0.1);
+}
+
+.login_items {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+input {
+    width: 100%;
+    border: 1px solid #A0AEC0;
+    border-radius: 5px;
+}
+
+.login_name {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.login_password {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.login_button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 100%;
+    height: 30px;
+    background-color: #EF3B2D;
+    font-family: 'Nunito', sans-serif;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgba(92, 92, 92, 0.2);
+}
+.login_button:hover {
+    background-color: #A0AEC0;
+}
+
+.login_checkbox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 14px;
+    color: rgba(113,128,150, 0.8);
+    font-weight: 100;
+}
+
+.login_checkbox > input {
+    width: 13px;
+    height: 13px;
+    margin-left: 10px;
+    border-color: rgba(113,128,150, 0.8);
+}

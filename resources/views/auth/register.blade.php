@@ -13,7 +13,6 @@
                         <label class="signin_login">Name</label>
                         <input id ="login" type="text" class="signin_login @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
                         
-                        {{--Работает ли это правильно?--}}
                         @error('login')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -23,7 +22,6 @@
                         <label class="signin_email">Email</label>
                         <input id="email" type="email" class="signin_email @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                         
-                        {{--Работает ли это правильно?--}}
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -33,12 +31,12 @@
                         <label class="signin_password">Password</label>
                         <input id="password" type="password" class="signin_password @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                         
-                        {{--Работает ли это правильно?--}}
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        
                         <div class="signin_confirm_password">Confirm Password</div>
                         <input id="password-confirm" type="password" class="signin_confirm_password" name="password_confirmation" required autocomplete="new-password">
                     </div>
