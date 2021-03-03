@@ -25,6 +25,7 @@ class CreateContactsTable extends Migration
             $table->string('direct_phone',20)->unique()->nullable();
             $table->string('office_phone',20)->nullable();
             $table->string('city')->nullable();
+            $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('photo')->default('user.png');
             $table->string('li')->unique()->nullable();

@@ -38,12 +38,14 @@
                     return false;
             }
 
+            
             function condup()
             {
-                var r=confirm("Do you want to duplicate this contact?")
-                if (r==true)
-                    return true;
-                else
+                //var r=confirm("Do you want to duplicate this contact?")
+                confirm("Currently disabled")
+                //if (r==true)
+                //    return true;
+                ///else
                     return false;
             }
 
@@ -79,8 +81,13 @@
                 <div class="menuel" >Search</div></a>
             <a href = "{{ url('users') }}">
                 <div class="menuel">Users</div></a>
-            <a href="{{ url('logout') }}">
-                <div class="menuel" style="border-top-right-radius: 8px; ">Logout</div></a>
+            <form method="POST" action="{{ route('logout') }}" class="home_back">
+            @csrf
+                <a href="#" onClick="this.parentNode.submit()">
+                    <div class="menuel" style="border-top-right-radius: 8px; ">Logout</div>
+                </a>
+            </form> 
+
         </div>
         @yield('content')
     </body>

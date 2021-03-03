@@ -20,9 +20,14 @@
                 <tr>
                     <td>{{ $user->first_name }}</td>
                     <td>{{ $user->last_name }}</td>
-                    <td>{{ $user->username }}</td>
+                    <td>{{ $user->email }}</td>
                     <td>
-                        <?php echo form_checkbox('Admin', '1', ($usr->admin>0), 'disabled'); ?></td>
+                    <input type="checkbox" name="admin"
+                        @if ($user->admin == 1)
+                            checked
+                        @endif                   
+                        disabled/>
+                        </td>
                     <td>
                         <a href="">    <button style="color:#333;" class="btn">Edit</button></a>
                         <a href="">  <button style="color:#333;" class="btn" onclick="return(userremove());">Remove</button></a>

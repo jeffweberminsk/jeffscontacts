@@ -54,6 +54,13 @@
                 </td>
             </tr>
             <tr>
+                <td>State:</td>
+                <td>
+                    <input type="text" name="state" id="state" class="form-control input-sm" tabindex="16"
+                        value="{{ $contact->state ?? ''}}">
+                </td>
+            </tr>
+            <tr>
                 <td>Country:</td>
                 <td>   
                     <input type="text" name="country" id="country" class="form-control input-sm" tabindex="16"
@@ -162,7 +169,7 @@
     <div id="buttons_main">
         <div id="buttons">
         @if (isset($contact))
-            <a href="{{ url('database/') }}"><div id="conbtnfirst" class="conbtnfirst">Add new </div>  </a>
+            <a href="{{ url('database/add') }}"><div id="conbtnfirst" class="conbtnfirst">Add new </div>  </a>
             <div id="conbtnfirst" class="conbtn" onclick="return(contactedit());">Save changes </div>
             <a href="{{ url('database/remove/'.$contact->id) }}"><div id="conbtnfirst" class="conbtn" onclick="return(conremove());">Remove</div> </a>
             <a href="{{ url('database/dup/'.$contact->id) }}"><div id="conbtnfirst" class="conbtn" onclick="return(condup());">Duplicate</div> </a>

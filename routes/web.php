@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,13 +30,23 @@ Route::get('/db', function () {
 //show home page
 Route::get('/', function () {
     return view('home');
-});
+})->middleware(['auth']);
 
-//editing contacts
-Route::prefix('database')->group(function () {
+//editing contacts 
+Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
+
+    //main page 
+    Route::get('/', function () {
+        //will show last record
+        if($maxid = DB::table('contacts')->max('id'))
+            return redirect('database/'.$maxid);
+        //if no records will show add page
+        else
+            return redirect('database/add');
+    });
 
     //show edit page for adding contact record
-    Route::get('/', function () {
+    Route::get('/add', function () {
         return view('edit');
     });
 
@@ -75,11 +86,10 @@ Route::prefix('database')->group(function () {
     Route::post('/add', function (Request $request) {
 
         $ready = false;
-        if ($request ->input('ready'))
+        if ($request->input('ready'))
             $ready = true;
-
         $buyer = false;
-        if ($request ->input('buyer'))
+        if ($request->input('buyer'))
             $buyer = true;
 
         $id = DB::table('contacts')->insertGetId(
@@ -88,6 +98,7 @@ Route::prefix('database')->group(function () {
             'job' => $request ->input('job'),
             'company' => $request ->input('company'),
             'city' => $request ->input('city'),
+            'state' => $request ->input('state'),
             'country' => $request ->input('country'),
             'office_phone' => $request ->input('office_phone'),
             'direct_phone' => $request ->input('direct_phone'),
@@ -122,6 +133,7 @@ Route::prefix('database')->group(function () {
                     'job' => $request ->input('job'),
                     'company' => $request ->input('company'),
                     'city' => $request ->input('city'),
+                    'state' => $request ->input('state'),
                     'country' => $request ->input('country'),
                     'office_phone' => $request ->input('office_phone'),
                     'direct_phone' => $request ->input('direct_phone'),
@@ -154,26 +166,62 @@ Route::prefix('database')->group(function () {
     });
 });
 
-//search
-Route::prefix('search')->group(function () {
+//search 
+Route::group(['prefix' => 'search','middleware' => ['auth']], function () {
     
     //show search page without results
     Route::get('/', function () {
         return view('search');
     });
 
+    //show search page with results
     Route::get('/', function (Request $request) {
+
+        $query = Contact::query();
+        //selecting what data we need to send
+        $query = $query->select(['id','first_name','last_name','work_email','company','personal_email']);
+        
+        //setting search parametrs
+        if($value = $request->input('first_name'))
+            $query = $query->where('first_name','like', '%'.$value.'%');
+        if($value = $request->input('last_name'))
+            $query = $query->where('last_name','like', '%'.$value.'%');
+        if($value = $request->input('company'))
+            $query = $query->where('company','like', '%'.$value.'%');
+        if($value = $request->input('email'))
+            $query = $query->where('work_email','like', '%'.$value.'%')
+                    ->orWhere('personal_email','like', '%'.$value.'%');
+        
+        if($value = $request->input('id_from'))
+            $query = $query->where('id','>=', $value);
+        if($value = $request->input('id_to'))
+            $query = $query->where('id','<=', $value);
+        
+        if($value = $request->input('ready'))
+            if ($value == 1)
+                $query = $query->where('ready',false);
+            else
+                $query = $query->where('ready',true);
+        //using paginate to auto divide resolts into groups of 20
+        $results = $query->paginate(20);
+        return view('search', ['results' => $results]);
+    });
+
+    //show search duplicate names
+    Route::get('/dupnames', function (Request $request) {
+
         return view('search', ['results' => []]);
     });
 
 });
 
 //editing users
-Route::prefix('users')->group(function () {
+Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
     
     //show search page without search result
     Route::get('/', function () {
-        return view('users');
+        $users = User::all();//select(['id','first_name','last_name','email','admin']);
+        return view('users', ['users' => $users]);
     });
 
 });
