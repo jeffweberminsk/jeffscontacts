@@ -1,0 +1,345 @@
+body {
+    margin: 0;
+    float:left;
+    width:100%;
+    height:100%;
+    border: 3px solid #BBCCFF;
+    border-bottom: 4px solid #BBCCFF;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+#clear{
+    clear:both;
+}
+
+#menu{
+    width:100%;
+    height:50px;
+    border-bottom: 3px solid #BBCCFF;
+    display:block;
+    background-color: aliceblue;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.menuel {
+    text-align: center;
+    width: 20%;
+    height: 100%;
+    background-color: aliceblue;
+    display: block;
+    float : left;
+    font-size:22px;
+    line-height: 46px;
+    border-left: 1px solid #BBCCFF;
+    border-right: 1px solid #BBCCFF;
+}
+
+.menuel:hover {
+    background-color: rgba(188, 203, 255, 0.4);
+}
+
+#mainuserdiv{
+    padding-top: 2%;
+    padding-bottom: 4%;
+    width:300px;
+    height:20%;
+    margin: 0 auto;
+}
+
+#userstable{
+    text-align: center;
+    padding-top:4%;
+    padding-bottom: 3%;
+    width:70%;
+    margin: 0 auto;
+}
+
+#contact{
+    margin-top:3px;
+    width:70%;
+    float:left;
+}
+
+#buttons_main{
+    width:30%;
+    top: 100px;
+    right: 0px;
+    position: fixed;
+}
+
+#buttons{
+    float:right;
+    width:66%;
+    border-top: 3px solid #BBCCFF;
+    border-left: 3px solid #BBCCFF;
+    border-bottom: 3px solid #BBCCFF;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color:aliceblue;
+}
+
+
+.conbtn{
+    text-align: center;
+    background-color: aliceblue;
+    display: block;
+    font-size:18px;
+    line-height: 46px;
+    border-bottom: 1px solid #BBCCFF;
+    color:#428bca;
+    text-underline-color: yellow;
+}
+
+.conbtn:hover{
+    background-color: rgba(188, 203, 255, 0.4);
+    cursor: pointer;
+}
+
+#conbtnfirst{
+    border-top-left-radius:8px;
+    text-align: center;
+    background-color: aliceblue;
+    display: block;
+    font-size:18px;
+    line-height: 46px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    width:100%;
+    border-bottom: 1px solid #BBCCFF;
+    color:#428bca;
+    outline: 0;
+    cursor: pointer;
+}
+
+#conbtnfirst:hover{
+    border-top-left-radius:0px;
+}
+
+
+#conbtnlast{
+    border-top-left-radius:8px;
+    text-align: center;
+    background-color: aliceblue;
+    display: block;
+    font-size:18px;
+    line-height: 46px;
+    cursor: pointer;
+    color:#428bca;
+}
+
+#conbtnfirst:hover{
+    border-top-left-radius:0px;
+    border-bottom-left-radius:0px;
+}
+
+#conbtnlastform{
+    border-top-left-radius:5px;
+    background-color: aliceblue;
+    display: block;
+    font-size:18px;
+}
+
+#conbtnlastform:hover{
+    background-color: rgba(188, 203, 255, 0.4);
+}
+
+#conbtnfirst:hover{
+    background-color: rgba(188, 203, 255, 0.4);
+}
+#conbtnlast:hover{
+    background-color: rgba(188, 203, 255, 0.4);
+}
+
+#contacts_table{
+    margin-left:13%;
+    margin-top:2px;
+    margin-bottom: 10%;
+    width:85%;
+
+}
+
+.table > tbody > tr:first-child > td {
+    border: none;
+}
+
+#userformtoptext{
+    margin:0 auto;
+    margin-bottom: 10%;
+    color:rgba(45, 110, 163, 0.95);
+}
+
+#contacttext{
+    color:rgba(45, 110, 163, 0.95);
+    margin-left: 13%;
+}
+
+#goto{
+    color:#428bca;
+    width:100%;
+    float:left;
+    cursor: pointer;
+    background-color:aliceblue;
+    border-bottom-left-radius:8px;
+    text-align: center;
+}
+
+#goto:hover{
+    background-color: rgba(188, 203, 255, 0.4);
+}
+
+#conid{
+    width:90%;
+    float:right;
+    margin-top:4%;
+}
+
+#inputdiv{
+    width:40%;
+    float:left;
+    margin-left: 15%;
+}
+
+.routescl{
+    float:left;
+}
+
+#rleft{
+    width:27%;
+    border-top-left-radius:8px;
+
+}
+#rleft:hover{
+    width:27%;
+    border-top-left-radius:0px;
+}
+
+#rcenter{
+    width:46%;
+    white-space: nowrap;
+}
+#rcenter:hover{
+    background-color:aliceblue;
+}
+
+#rright{
+    width:27%;
+}
+
+/*.searchdiv{*/
+    /*width:60%;*/
+    /*float:left;*/
+    /*margin: 2% 2% 1% 2%;*/
+/*}*/
+
+/*.aftersearchdiv{*/
+    /*width:60%;*/
+    /*float:left;*/
+    /*margin: 0% 2% 1% 2%;*/
+/*}*/
+
+#searchmain{
+    float:left;
+    margin-top: 25px;
+    border-bottom: 3px solid #BBCCFF;
+    padding-bottom: 25px;
+    height: 15%;
+    width:100%;
+}
+
+table.other {
+    margin-top:50px;
+    width: auto;
+    min-width: 70%;
+    display: table;
+}
+
+.center-table
+{
+    margin-right: auto !important;
+    margin-left: auto !important;
+    float: none !important;
+}
+
+#searchtable{
+    float:left;
+    width:100%;
+    /*margin: 0% 5% 5% 5%;*/
+}
+
+.verify-button{
+    height:30px;
+    width:29%;
+    float:right;
+    border:2px solid #BBCCFF;
+    background-color:white;
+}
+
+.verify-button:hover{
+    color: white;
+    background-color: #BBCCFF;
+}
+
+.search-button{
+    height:30px;
+    width:100%;
+    float:left;
+    border:2px solid #BBCCFF;
+    background-color:white;
+}
+
+.search-button:hover{
+    color: white;
+    background-color: #BBCCFF;
+}
+
+.search-button-big{
+    color: #428bca;
+    width:100%;
+    float:left;
+    border:1px solid #BBCCFF;
+    background-color:white;
+}
+
+.search-button-big:hover{
+    color: white;
+    background-color: #BBCCFF;
+}
+
+.duplicates_main{
+    float:left;
+    width: 100%;
+}
+
+#loader{
+    background:url(ajax-loader.gif) no-repeat center center;
+    margin-top:-5px;
+    align-content: center;
+    display: none;
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 10;
+}
