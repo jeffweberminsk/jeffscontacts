@@ -27,14 +27,9 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="login_checkbox">
-                            <label for="remember" class="checkbox_title">Remember Me</label>
-                            <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                        </div>
                         <div class="login_buttons">
                             <button type="submit" class="login_button">Enter</button>                          
                         </div>
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>                    
                     </form> 
                 </div>
             </div>         

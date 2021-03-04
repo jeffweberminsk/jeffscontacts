@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Models\Contact;
 use App\Models\User;
+//use App\Http\Controllers\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +21,6 @@ use App\Models\User;
 
 Route::get('/welcome', function () {
     return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('home');
 });
 
 Route::get('/db', function () {
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
     //main page 
     Route::get('/', function () {
         //will show last record
-        if($maxid = DB::table('contacts')->max('id'))
+        if($maxid = Contact::max('id'))
             return redirect('database/'.$maxid);
         //if no records will show add page
         else
@@ -59,40 +59,63 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
     //show edit page for previous record(orderd by id)
     Route::get('/{id}/previous', function ($id) {    
         //if current record is first we go to the last record
-        $minid = DB::table('contacts')->min('id');
+        $minid = Contact::min('id');
         if ($minid == $id){
-            $maxid = DB::table('contacts')->max('id');
+            $maxid = Contact::max('id');
             return redirect('database/'.$maxid);
         }
         //if current record is not first we  get biggest id that is smaller then current
-        $id = DB::table('contacts')->where('id', '<', $id)->max('id');
+        $id = Contact::where('id', '<', $id)->max('id');
         return redirect('database/'.($id));
     });
 
     //show edit page for next record(orderd by id)
     Route::get('/{id}/next', function ($id) {
         //if current record is last we go to the first record
-        $maxid = DB::table('contacts')->max('id');
+        $maxid = Contact::max('id');
         if ($maxid == $id){
-            $minid = DB::table('contacts')->min('id');
+            $minid = Contact::min('id');
             return redirect('database/'.$minid);
         }
         //if current record is not first we  get smalles id that is bigger then current
-        $id = DB::table('contacts')->where('id', '>', $id)->min('id');
+        $id = Contact::where('id', '>', $id)->min('id');
         return redirect('database/'.($id));
     });
 
     //adding contact record to db
     Route::post('/add', function (Request $request) {
 
+        //validate input
+        Validator::make($request->all(), [
+            'work_email' => [
+                'nullable', 
+                Rule::unique(Contact::class),],
+            'personal_email' => [
+                'nullable', 
+                Rule::unique(Contact::class),],
+            'mobile_phone_a' => [
+                'nullable',
+                Rule::unique(Contact::class),],
+            'mobile_phone_b' => [
+                'nullable',
+                Rule::unique(Contact::class),],
+            'direct_phone' => [
+                'nullable',
+                Rule::unique(Contact::class),],
+            'li' => [
+                'nullable',
+                Rule::unique(Contact::class),],
+            ])->validate();
+
+        //save in db
         $ready = false;
         if ($request->input('ready'))
             $ready = true;
         $buyer = false;
         if ($request->input('buyer'))
             $buyer = true;
-
-        $id = DB::table('contacts')->insertGetId(
+        return redirect('database/'.$id);
+        $id = Contact::create(
             ['first_name' => $request->input('first_name'), 
             'last_name' => $request ->input('last_name'),
             'job' => $request ->input('job'),
@@ -112,12 +135,35 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
             'buyer' => $buyer,
             'last_check' => now(),
             'notes' => $request ->input('notes')]
-        );
+            )->id;
         return redirect('database/'.$id);
     });
 
     //saving contact record changes to db
     Route::post('/{id}', function ($id,Request $request) {
+
+        //validate input
+        Validator::make($request->all(), [
+            'work_email' => [
+                'nullable', 
+                Rule::unique(Contact::class)->ignore($id),],
+            'personal_email' => [
+                'nullable', 
+                Rule::unique(Contact::class)->ignore($id),],
+            'mobile_phone_a' => [
+                'nullable',
+                Rule::unique(Contact::class)->ignore($id),],
+            'mobile_phone_b' => [
+                'nullable',
+                Rule::unique(Contact::class)->ignore($id),],
+            'direct_phone' => [
+                'nullable',
+                Rule::unique(Contact::class)->ignore($id),],
+            'li' => [
+                'nullable',
+                Rule::unique(Contact::class)->ignore($id),],
+            ])->validate();
+
         $ready = false;
         if ($request ->input('ready'))
             $ready = true;
@@ -125,8 +171,7 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
         $buyer = false;
         if ($request ->input('buyer'))
             $buyer = true;
-        DB::table('contacts')
-                ->where('id', $id)
+        DB::table('contacts')->where('id', $id)
                 ->update(
                     ['first_name' => $request->input('first_name'), 
                     'last_name' => $request ->input('last_name'),
@@ -153,8 +198,7 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
 
     //removing contact record from db
     Route::get('/remove/{id}', function ($id) {
-        DB::table('contacts')
-        ->where('id', $id)
+        Contact::where('id', $id)
         ->delete();
         return redirect('database/'.($id).'/previous');
     });
@@ -323,3 +367,5 @@ Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
     });
 
 });
+
+//Route::resource('contacts', ContactController::class);

@@ -22,77 +22,92 @@
                 <td>First Name: </td>
                 <td>
                     <input type="text" name="first_name" id="first_name" class="form-control input-sm" tabindex="1"
-                        value="{{ $contact->first_name ?? ''}}">
+                        value="{{ $contact->first_name ?? old('first_name') }}">
                 </td>
             </tr>
             <tr>
                 <td>Last Name: </td>
                 <td>
                     <input type="text" name="last_name" id="last_name" class="form-control input-sm" tabindex="3"
-                        value="{{ $contact->last_name ?? ''}}">
+                        value="{{ $contact->last_name ?? old('last_name') }}">
                 </td>
             </tr>
             <tr>
                 <td>Job Title: </td>
                 <td>
                     <input type="text" name="job" id="job" class="form-control input-sm" tabindex="4"
-                        value="{{ $contact->job ?? ''}}">
+                        value="{{ $contact->job ?? old('job') }}">
                 </td>
             </tr>
             <tr>
                 <td>Company: </td>
                 <td>
                     <input type="text" name="company" id="company" class="form-control input-sm" tabindex="10"
-                        value="{{ $contact->company ?? ''}}">
+                        value="{{ $contact->company ?? old('company') }}">
                 </td>
             </tr>
             <tr>
                 <td>City:</td>
                 <td>
                     <input type="text" name="city" id="city" class="form-control input-sm" tabindex="16"
-                        value="{{ $contact->city ?? ''}}">
+                        value="{{ $contact->city ?? old('city') }}">
                 </td>
             </tr>
             <tr>
                 <td>State:</td>
                 <td>
                     <input type="text" name="state" id="state" class="form-control input-sm" tabindex="16"
-                        value="{{ $contact->state ?? ''}}">
+                        value="{{ $contact->state ?? old('state') }}">
                 </td>
             </tr>
             <tr>
                 <td>Country:</td>
                 <td>   
                     <input type="text" name="country" id="country" class="form-control input-sm" tabindex="16"
-                            value="{{ $contact->country ?? ''}}">  
+                            value="{{ $contact->country ?? old('country') }}">  
                 </td>
             </tr>
             <tr>
                 <td>Company Phone: </td>
                 <td>
                     <input type="text" name="office_phone" id="office_phone" class="form-control input-sm" tabindex="13"
-                        value="{{ $contact->office_phone ?? ''}}">
+                        value="{{ $contact->office_phone ?? old('office_phone') }}">
                 </td>
             </tr>
             <tr>
                 <td>Direct phone: </td>
                 <td>
                     <input type="text" name="direct_phone" id="direct_phone" class="form-control input-sm" tabindex="9"
-                        value="{{ $contact->direct_phone ?? ''}}">
+                        value="{{ $contact->direct_phone ?? old('direct_phone') }}">
+                    @error('direct_phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror    
                 </td>
             </tr>
             <tr>
                 <td>Mobile phone Nr.1: </td>
                 <td>
                     <input type="text" name="mobile_phone_a" id="mobile_phone_a" class="form-control input-sm" tabindex="7"
-                        value="{{ $contact->mobile_phone_a ?? ''}}">
+                        value="{{ $contact->mobile_phone_a ?? old('mobile_phone_a') }}">
+                    @error('mobile_phone_a')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror                   
                 </td>
             </tr>
             <tr>
                 <td>Mobile phone Nr.2: </td>
                 <td>
                     <input type="text" name="mobile_phone_b" id="mobile_phone_b" class="form-control input-sm" tabindex="8"
-                        value="{{ $contact->mobile_phone_b ?? ''}}">
+                        value="{{ $contact->mobile_phone_b ?? old('mobile_phone_b') }}">
+                    @error('mobile_phone_b')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror                    
                 </td>
             </tr>
             <tr>
@@ -100,30 +115,45 @@
                 <td>
                     <span style="float:left;width:69%;">
                         <input type="email" name="work_email" id="work_email" class="form-control input-sm" tabindex="5"
-                            value="{{ $contact->work_email ?? ''}}"></span>
-                    <div id="work_js_verify" class="btn btn-sm verify-button">Verify Email</div>
+                            value="{{ $contact->work_email ??  old('work_email') }}"></span>
+                    <div id="work_js_verify" class="btn btn-sm verify-button disabled">Verify Email</div>
+                    @error('work_email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </td>
             </tr>
             <tr>
                 <td>Personal E-mail: </td>
                 <td>
                     <span style="float:left;width:69%;"><input type="email" name="personal_email" id="personal_email" class="form-control input-sm" tabindex="6"
-                        value="{{ $contact->personal_email ?? ''}}"></span>
-                    <div id="personal_js_verify" class="btn btn-sm verify-button">Verify Email</div>
+                        value="{{ $contact->personal_email ?? old('personal_email') }}"></span>
+                    <div id="personal_js_verify" class="btn btn-sm verify-button disabled">Verify Email</div>
+                    @error('personal_email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror               
                 </td>
             </tr>
             <tr>
                 <td>Linkedin url </td>
                 <td>
                     <input type="text" name="li" id="li" class="form-control input-sm" tabindex="8"
-                        value="{{ $contact->li ?? ''}}">
+                        value="{{ $contact->li ?? old('li') }}">
+                    @error('li')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror    
                 </td>
             </tr>
             <tr>
                 <td>Jeffcode: </td>
                 <td>
                     <input type="text" name="jeffcode" id="jeffcode" class="form-control input-sm" tabindex="8"
-                        value="{{ $contact->jeffcode ?? ''}}">
+                        value="{{ $contact->jeffcode ?? old('jeffcode') }}">
                 </td>
             </tr>
             <tr>
@@ -154,7 +184,7 @@
                 <td>Notes: </td>
                 <td>
                     <textarea rows="4" name="notes" id="notes" class="form-control input-sm" tabindex="23"
-                            value="">{{ $contact->notes ?? ''}}</textarea>
+                            value="">{{ $contact->notes ?? old('notes') }}</textarea>
 
                 </td>
             </tr>
