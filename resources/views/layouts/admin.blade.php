@@ -9,36 +9,13 @@
         <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 
-        <script type="text/javascript">
-
-            function useredit()
-            {
-                var r=confirm("Do you want to edit this user?")
-                if (r==true)
-                    return true;
-                else
-                    return false;
-            }
-
-            function userremove()
-            {
-                var r=confirm("Do you want to remove this user?")
-                if (r==true)
-                    return true;
-                else
-                    return false;
-            }
-
-            function conedit()
-            {
-                var r=confirm("Do you want to edit this contact?")
-                if (r==true)
-                    return true;
-                else
-                    return false;
-            }
-
-        </script>
+        @if(empty(auth()->user()->admin) || !auth()->user()->admin)
+            <style>
+                .menuel {
+                    width: 25%;
+                }
+            </style>
+        @endif
 
     </head>
     <body>

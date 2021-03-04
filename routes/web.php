@@ -19,14 +19,6 @@ use App\Models\User;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
-Route::get('/db', function () {
-    return view('db');
-})->middleware(['auth']);
-
 //show home page
 Route::get('/', function () {
     return view('home');
@@ -114,8 +106,7 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
         $buyer = false;
         if ($request->input('buyer'))
             $buyer = true;
-        return redirect('database/'.$id);
-        $id = Contact::create(
+        $id = DB::table('contacts')->insertGetId(
             ['first_name' => $request->input('first_name'), 
             'last_name' => $request ->input('last_name'),
             'job' => $request ->input('job'),
@@ -135,7 +126,7 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
             'buyer' => $buyer,
             'last_check' => now(),
             'notes' => $request ->input('notes')]
-            )->id;
+            );
         return redirect('database/'.$id);
     });
 
@@ -202,22 +193,11 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
         ->delete();
         return redirect('database/'.($id).'/previous');
     });
-
-    //duplicating contact record NOT IMPLEMENTED
-    Route::get('/dup/{id}', function ($id) {
-        $contact = Contact::findOrFail($id);
-        return view('edit',['contact' => $contact]);
-    });
 });
 
 //search 
 Route::group(['prefix' => 'search','middleware' => ['auth']], function () {
     
-    //show search page without results NOT IMPLEMENTED
-    Route::get('/', function () {
-        return view('search');
-    });
-
     //show search page with results
     Route::get('/', function (Request $request) {
 
@@ -264,7 +244,8 @@ Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
     
     //show search page without search result
     Route::get('/', function () {
-        $users = User::all();//select(['id','first_name','last_name','email','admin']);
+        //selecting only what we need
+        $users = User::select(['id','first_name','last_name','email','admin'])->get();
         return view('users', ['users' => $users]);
     });
 
@@ -336,6 +317,7 @@ Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
                 $remove = true;
         }
 
+        //updating all the fieledes accept password
         DB::table('users')
         ->where('id', $id)
         ->update(
@@ -349,12 +331,14 @@ Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
                 'remove' => $remove]
         );
 
+        //updaing password field olny if new password was entered
         if ($request['password'])
             DB::table('users')
             ->where('id', $id)
             ->update(
                 ['password' => Hash::make($request['password'])]
             );
+
         return redirect('users/');
     });
 

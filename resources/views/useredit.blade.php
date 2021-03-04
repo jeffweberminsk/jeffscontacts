@@ -71,8 +71,22 @@
             Admin automatically gets all permissions turned on.</br>
         </div></br>
 
-        <input class="btn" type="submit" value="Save">
+        <input class="btn" type="submit" onclick="return(useredit());" value="Save">
         <a href="{{ url('/users') }}"><input class="btn" type="button" value="Cancel" style="float:right; color: #333;"></a>
     </form>
-</div>  
+</div> 
+
+<script type="text/javascript">
+
+    function useredit()
+    {
+        var r=confirm("Do you want to edit this user?")
+        if (r==true)
+            return true;
+        else
+            return false;
+    }
+    
+</script>
+
 @endsection

@@ -29,7 +29,7 @@
                         disabled/>
                         </td>
                     <td>
-                            <a href="{{ url('users/'.$user->id) }}">  <button style="color:#333;" class="btn">Edit</button></a>
+                            <a href="{{ url('users/'.$user->id) }}">  <button style="color:#333;" class="btn" onclick="return(userremove());">Edit</button></a>
                             <a href="{{ url('users/remove/'.$user->id) }}">  <button style="color:#333;" class="btn" onclick="return(userremove());">Remove</button></a>
                     </td>
                 </tr>
@@ -40,8 +40,21 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a href="{{ url('users/add') }}"><button class="btn">New user</button></a></td>
+                    <td><a href="{{ url('users/add') }}"><button style="color:#333;" class="btn">New user</button></a></td>
                 </tr>
         </table>
 </div>
+
+<script type="text/javascript">
+
+    function userremove()
+    {
+        var r=confirm("Do you want to remove this user?")
+        if (r==true)
+            return true;
+        else
+            return false;
+    }
+
+</script>
 @endsection

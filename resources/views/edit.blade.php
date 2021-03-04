@@ -298,7 +298,7 @@ function condup(){
             if($.isNumeric(id)){
                 $("#loader").show();
                 var thisurl = window.location.hostname;
-                var url = 'http://'+thisurl+'/'+id;
+                var url = 'http://'+thisurl+'/database/'+id;
                 window.location = url;
             }else{
                 alert('Please type Ad ID correctly.');

@@ -9,16 +9,16 @@
             <h4>
                 Your status: Admin
             </h4>
+        @else
+            <h4>
+                Your can: look  
+                @if(auth()->user()->edit) edit @endif 
+                @if(auth()->user()->create) create duplicate @endif
+                @if(auth()->user()->remove) delete @endif
+            </h4>
         @endif
-        <br>
-        <h4>Notes:</h4><br>
-        <form role="form" action="home/note" method="post" >
-            <textarea rows="12" class="form-control" name="note" placeholder="Everyone can leave note here">
-                {{ $notes ?? ''}}
-            </textarea>
-            <br>
-            <div id="freeowtestas"><input class="btn" style="color:#333333;" type="submit" value="Save Notes"></div>
-        </form>
+        
+
     </div>
 </div>
 @endsection
