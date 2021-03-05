@@ -56,15 +56,102 @@
             <tr>
                 <td>State:</td>
                 <td>
-                    <input type="text" name="state" id="state" class="form-control input-sm" tabindex="16"
+                    <input list="states" type="text" name="state" id="state" class="form-control input-sm" tabindex="16"
                         value="{{ $contact->state ?? old('state') }}">
+                    <datalist id="states">  
+                        <!--us states-->                      
+                        <option value="Alabama">
+                        <option value="Alaska">
+                        <option value="Arizona">
+                        <option value="California">
+                        <option value="Colorado">
+                        <option value="Delaware">
+                        <option value="Florida">
+                        <option value="Georgia">
+                        <option value="Hawaii">
+                        <option value="Idaho">
+                        <option value="Illinois">
+                        <option value="Indiana">
+                        <option value="Iowa">
+                        <option value="Kansas">
+                        <option value="Kentucky">
+                        <option value="Louisiana">
+                        <option value="Maine">
+                        <option value="Maryland">
+                        <option value="Massachusetts">
+                        <option value="Michigan">
+                        <option value="Minnesota">
+                        <option value="Mississippi">
+                        <option value="Missouri">
+                        <option value="Montana">
+                        <option value="Nebraska">
+                        <option value="Nevada">
+                        <option value="New Hampshire">
+                        <option value="New Jersey">
+                        <option value="New Jersey">
+                        <option value="New Mexico">
+                        <option value="New York">
+                        <option value="North Carolina">
+                        <option value="North Dakota">
+                        <option value="Ohio">
+                        <option value="Oklahoma">
+                        <option value="Oregon">
+                        <option value="Pennsylvania">
+                        <option value="Rhode Island">
+                        <option value="South Carolina">
+                        <option value="South Dakota">
+                        <option value="Tennessee">
+                        <option value="Texas">
+                        <option value="Utah">
+                        <option value="Vermont">
+                        <option value="Virginia">
+                        <option value="Washington">
+                        <option value="West Virginia">
+                        <option value="Wisconsin">
+                        <option value="Wyoming">
+
+                        <!--canadian states-->
+                        <option value="Alberta">
+                        <option value="British Columbia ">
+                        <option value="Manitoba">
+                        <option value="New Brunswick">
+                        <option value="Newfoundland">
+                        <option value="Nova Scotia">
+                        <option value="Ontario">
+                        <option value="Prince Edward Island">
+                        <option value="Quebec">
+                        <option value="Saskatchewan">
+                    </datalist>                    
                 </td>
             </tr>
             <tr>
                 <td>Country:</td>
                 <td>   
-                    <input type="text" name="country" id="country" class="form-control input-sm" tabindex="16"
+                    <input list="countries" type="text" name="country" id="country" class="form-control input-sm" tabindex="16"
                             value="{{ $contact->country ?? old('country') }}">  
+                    <datalist id="countries">                        
+                        <option value="Australia">
+                        <option value="Brazil">
+                        <option value="Canada">
+                        <option value="Eqypt">
+                        <option value="Iraq">
+                        <option value="Edge">
+                        <option value="Kazakhstan">
+                        <option value="Kuwait">
+                        <option value="Malaysia">
+                        <option value="Mexico">
+                        <option value="Netherlands">
+                        <option value="Nigeria">
+                        <option value="Norway">
+                        <option value="Oman">
+                        <option value="Qatar">
+                        <option value="Russian Federation">
+                        <option value="Saudi Arabia">
+                        <option value="Singapore">
+                        <option value="United Arab Emirates">
+                        <option value="United Kingdom">
+                        <option value="United States">
+                    </datalist>
                 </td>
             </tr>
             <tr>

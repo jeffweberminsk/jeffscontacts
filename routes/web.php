@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+
 use App\Models\Contact;
 use App\Models\User;
 
@@ -265,6 +266,31 @@ Route::group(['prefix' => 'users',], function () {
     //adding contact user to db
     Route::post('/add', function (Request $request) {
 
+        //validate input
+        Validator::make($request->all(), [
+           'first_name' => [
+                'required', 
+                'string', 
+                'max:255',],
+            'last_name' => [
+                'required', 
+                'string', 
+                'max:255',],
+            'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique(User::class),
+                ],
+                'password' => [
+                    'required', 
+                    'string',
+                    'confirmed'
+                ],
+            ])->validate();
+
+        //set all privileges if admin is set 
         $admin = false;
         if($request['admin']){
             $admin = true;
@@ -300,7 +326,33 @@ Route::group(['prefix' => 'users',], function () {
 
     //saving user changes to db
     Route::post('/{id}', function ($id,Request $request) {
-        
+        //validate input
+        Validator::make($request->all(), [
+            'first_name' => [
+                'required', 
+                'string', 
+                'max:255',
+            ],
+            'last_name' => [
+                'required', 
+                'string', 
+                'max:255',
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                    Rule::unique(User::class)->ignore($id),
+                ],
+            'password' => [
+                'nullable', 
+                'string',
+                'confirmed'
+            ],
+        ])->validate();
+
+        //set all privileges if admin is set
         $admin = false;
         if($request['admin']){
             $admin = true;

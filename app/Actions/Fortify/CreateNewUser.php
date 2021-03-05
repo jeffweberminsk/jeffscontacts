@@ -39,33 +39,10 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        /*$admin = false;
-        if(isset($input['admin'])){
-            $admin = true;
-            $edit = true;
-            $create = true;
-            $remove = true; 
-        }
-        else{
-            $edit = false;
-            if(isset($input['edit']))
-                $edit = true;        
-            $create = false;
-            if(isset($input['create']))
-                $edit = true;        
-            $remove = false;
-            if(isset($input['remove']))
-                $remove = true;
-        }*/
-
         return User::create([
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'email' => $input['email'],
-          //  'admin' => $admin,
-          //  'edit' => $edit,
-          //  'create' => $create,
-          // 'remove' => $remove,
             'password' => Hash::make($input['password']),
         ]);
     }

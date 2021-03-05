@@ -11,30 +11,55 @@
 @endif
 
         @csrf 
+        @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
         <input type="email" name="email" id="email" class="form-control"
                placeholder="Username (E-mail)" tabindex="1"
-               value="{{ $user->email ?? ''}}"><br>                        
+               value="{{ $user->email ?? old('email')}}"><br>                        
 
-        
+        @error('first_name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
         <input type="text" name="first_name" id="first_name" class="form-control"
                placeholder="First Name" tabindex="2"
-               value="{{ $user->first_name ?? ''}}"><br>
+               value="{{ $user->first_name ?? old('first_name') }}"><br>
 
 
+
+        @error('last_name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
         <input type="text" name="last_name" id="last_name" class="form-control"
                placeholder="Last Name" tabindex="3"
-               value="{{ $user->last_name ?? ''}}"><br>
+               value="{{ $user->last_name ?? old('last_name')}}"><br>
 
+        @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
         <input type="password" name="password" id="password" class="form-control"
                placeholder="Password" tabindex="4"
                value=""><br>
 
 
-       <input id="password-confirm" type="password" name="password_confirmation" @empty($user) required @endempty autocomplete="new-password" class="form-control"
+        <input id="password-confirm" type="password" name="password_confirmation" autocomplete="new-password" class="form-control"
                placeholder="Confirm Password" tabindex="5"
                value=""></br> 
 
 
+        
+        
+        
+        
+        
         <div align="center" style="font-size:17px;">Permissions on contacts</div>
         <table class="table" style="text-align:center;">
         <tr>
@@ -44,15 +69,15 @@
         </tr>
         <tr>
             <td><input type="checkbox" name="create"
-            @if(isset($user) && $user->create == 1)
+            @if($user->create ?? old('create'))
                 checked
             @endif    ></td>
             <td><input type="checkbox" name="edit"
-            @if(isset($user) && $user->edit == 1)
+            @if($user->edit ?? old('edit'))
                 checked
             @endif    ></td>
             <td><input type="checkbox" name="remove"
-            @if(isset($user) && $user->remove == 1)
+            @if($user->remove ?? old('remove'))
                 checked
             @endif    ></td>
         </tr>
@@ -63,7 +88,7 @@
         <div class="checkbox" align="center">
             <label>
                 <input type="checkbox" name="admin"
-                @if(isset($user) && $user->admin == 1)
+                @if($user->admin ?? old('admin'))
                     checked
                 @endif    > Check to set up <b>admin</b> features.
             </label>
