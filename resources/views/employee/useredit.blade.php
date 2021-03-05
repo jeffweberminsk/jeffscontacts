@@ -80,7 +80,11 @@
 
     function useredit()
     {
-        var r=confirm("Do you want to edit this user?")
+        @if (isset($user))
+            var r=confirm("Do you want to edit this user?")
+        @else
+            var r=confirm("Do you want to add this user?")
+        @endif
         if (r==true)
             return true;
         else

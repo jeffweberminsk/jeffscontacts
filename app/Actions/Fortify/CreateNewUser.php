@@ -21,14 +21,14 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-            'first_name' => [
+       /*     'first_name' => [
                 'required', 
                 'string', 
                 'max:255',],
             'last_name' => [
                 'required', 
                 'string', 
-                'max:255',],
+                'max:255',],*/
             'email' => [
                 'required',
                 'string',
@@ -39,7 +39,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        $admin = false;
+        /*$admin = false;
         if(isset($input['admin'])){
             $admin = true;
             $edit = true;
@@ -56,16 +56,16 @@ class CreateNewUser implements CreatesNewUsers
             $remove = false;
             if(isset($input['remove']))
                 $remove = true;
-        }
+        }*/
 
         return User::create([
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'email' => $input['email'],
-            'admin' => $admin,
-            'edit' => $edit,
-            'create' => $create,
-            'remove' => $remove,
+          //  'admin' => $admin,
+          //  'edit' => $edit,
+          //  'create' => $create,
+          // 'remove' => $remove,
             'password' => Hash::make($input['password']),
         ]);
     }

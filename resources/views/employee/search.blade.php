@@ -44,7 +44,7 @@
     @if (count($results))
     <div id="searchtable" class="col-lg-10 col-md-10 col-sm-10">
        <div style="width:100%;">
-            <div style="float:left;">{{ $results->links('custom') }}</div>
+            <div style="float:left;">{{ $results->links('employee.custom') }}</div>
             <div class="menuel" style="float:left; margin: 15px 20px; color: #428BCA; text-align: left; background-color: white; border-left: 0px; border-right: 0px; white-space: nowrap">Total found: {{ $results->total() }}</div>
         </div>
         

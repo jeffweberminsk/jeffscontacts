@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\Contact;
 use App\Models\User;
-//use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +18,16 @@ use App\Models\User;
 |
 */
 
-//show home page
-Route::get('/', function () {
-    return view('home');
-})->middleware(['auth']);
 
-//editing contacts 
-Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
+//employee subdomain routse unaccesible to regular users 
+Route::group(['domain' => 'employee.jeffscontacts.test', 'middleware' => ['auth', 'employee']], function () {
+    
+Route::get('/', function () {
+    return view('employee.home');
+});
+
+//editing contacts
+Route::group(['prefix' => 'database'], function () {
 
     //main page 
     Route::get('/', function () {
@@ -39,13 +41,13 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
 
     //show edit page for adding contact record
     Route::get('/add', function () {
-        return view('edit');
+        return view('employee.edit');
     });
 
     //show edit page for record with given id
     Route::get('/{id}', function ($id) {
         $contact = Contact::findOrFail($id);
-        return view('edit',['contact' => $contact]);
+        return view('employee.edit',['contact' => $contact]);
     });
 
     //show edit page for previous record(orderd by id)
@@ -196,7 +198,7 @@ Route::group(['prefix' => 'database','middleware' => ['auth']], function () {
 });
 
 //search 
-Route::group(['prefix' => 'search','middleware' => ['auth']], function () {
+Route::group(['prefix' => 'search',], function () {
     
     //show search page with results
     Route::get('/', function (Request $request) {
@@ -228,36 +230,36 @@ Route::group(['prefix' => 'search','middleware' => ['auth']], function () {
                 $query = $query->where('ready',true);
         //using paginate to auto divide resolts into groups of 20
         $results = $query->paginate(20);
-        return view('search', ['results' => $results]);
+        return view('employee.search', ['results' => $results]);
     });
 
     //show search duplicate names
     Route::get('/dupnames', function (Request $request) {
-
-        return view('search', ['results' => []]);
+        abort(404);
+        return "not implemented";//view('employee.search', ['results' => []]);
     });
 
 });
 
 //editing users
-Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
+Route::group(['prefix' => 'users',], function () {
     
-    //show search page without search result
+    //show all users
     Route::get('/', function () {
         //selecting only what we need
-        $users = User::select(['id','first_name','last_name','email','admin'])->get();
-        return view('users', ['users' => $users]);
+        $users = User::where('employee', 1)->select(['id','first_name','last_name','email','admin'])->get();
+        return view('employee.users', ['users' => $users]);
     });
 
     //show edit page for adding user
     Route::get('/add', function () {
-        return view('useredit');
+        return view('employee.useredit');
     });
 
     //show edit page for record with given id
     Route::get('/{id}', function ($id) {
         $user = User::findOrFail($id);
-        return view('useredit',['user' => $user]);
+        return view('employee.useredit',['user' => $user]);
     });
 
     //adding contact user to db
@@ -286,6 +288,7 @@ Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'email' => $request['email'],
+            'employee' => 1,
             'admin' => $admin,
             'edit' => $edit,
             'create' => $create,
@@ -352,4 +355,33 @@ Route::group(['prefix' => 'users','middleware' => ['auth']], function () {
 
 });
 
-//Route::resource('contacts', ContactController::class);
+});
+
+//site routes accesible to regular users 
+
+//show home page
+Route::get('/', function () {
+    return view('main.home');
+});
+
+Route::get('/plans', function () {
+    return view('main.plans');
+});
+
+Route::get('/user', function () {
+    return view('main.user');
+});
+
+Route::get('/search', function () {
+    return view('main.search');
+});
+
+Route::get('/contact', function () {
+    return view('main.contact');
+});
+
+Route::get('/pay', function () {
+    return view('main.pay');
+});
+
+

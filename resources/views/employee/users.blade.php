@@ -29,7 +29,7 @@
                         disabled/>
                         </td>
                     <td>
-                            <a href="{{ url('users/'.$user->id) }}">  <button style="color:#333;" class="btn" onclick="return(userremove());">Edit</button></a>
+                            <a href="{{ url('users/'.$user->id) }}">  <button style="color:#333;" class="btn">Edit</button></a>
                             <a href="{{ url('users/remove/'.$user->id) }}">  <button style="color:#333;" class="btn" onclick="return(userremove());">Remove</button></a>
                     </td>
                 </tr>
