@@ -28,106 +28,118 @@
             <tr>
                 <td>Last Name: </td>
                 <td>
-                    <input type="text" name="last_name" id="last_name" class="form-control input-sm" tabindex="3"
+                    <input type="text" name="last_name" id="last_name" class="form-control input-sm" tabindex="2"
                         value="{{ $contact->last_name ?? old('last_name') }}">
                 </td>
             </tr>
             <tr>
                 <td>Job Title: </td>
                 <td>
-                    <input type="text" name="job" id="job" class="form-control input-sm" tabindex="4"
+                    <input type="text" name="job" id="job" class="form-control input-sm" tabindex="3"
                         value="{{ $contact->job ?? old('job') }}">
                 </td>
             </tr>
             <tr>
                 <td>Company: </td>
                 <td>
-                    <input type="text" name="company" id="company" class="form-control input-sm" tabindex="10"
+                    <input type="text" name="company" id="company" class="form-control input-sm" tabindex="4"
                         value="{{ $contact->company ?? old('company') }}">
                 </td>
             </tr>
             <tr>
                 <td>City:</td>
                 <td>
-                    <input type="text" name="city" id="city" class="form-control input-sm" tabindex="16"
+                    <input type="text" name="city" id="city" class="form-control input-sm" tabindex="5"
                         value="{{ $contact->city ?? old('city') }}">
                 </td>
             </tr>
             <tr>
                 <td>State:</td>
                 <td>
-                    <input list="states" type="text" name="state" id="state" class="form-control input-sm" tabindex="16"
-                        value="{{ $contact->state ?? old('state') }}">
-                    <datalist id="states">  
-                        <!--us states-->                      
-                        <option value="Alabama">
-                        <option value="Alaska">
-                        <option value="Arizona">
-                        <option value="California">
-                        <option value="Colorado">
-                        <option value="Delaware">
-                        <option value="Florida">
-                        <option value="Georgia">
-                        <option value="Hawaii">
-                        <option value="Idaho">
-                        <option value="Illinois">
-                        <option value="Indiana">
-                        <option value="Iowa">
-                        <option value="Kansas">
-                        <option value="Kentucky">
-                        <option value="Louisiana">
-                        <option value="Maine">
-                        <option value="Maryland">
-                        <option value="Massachusetts">
-                        <option value="Michigan">
-                        <option value="Minnesota">
-                        <option value="Mississippi">
-                        <option value="Missouri">
-                        <option value="Montana">
-                        <option value="Nebraska">
-                        <option value="Nevada">
-                        <option value="New Hampshire">
-                        <option value="New Jersey">
-                        <option value="New Jersey">
-                        <option value="New Mexico">
-                        <option value="New York">
-                        <option value="North Carolina">
-                        <option value="North Dakota">
-                        <option value="Ohio">
-                        <option value="Oklahoma">
-                        <option value="Oregon">
-                        <option value="Pennsylvania">
-                        <option value="Rhode Island">
-                        <option value="South Carolina">
-                        <option value="South Dakota">
-                        <option value="Tennessee">
-                        <option value="Texas">
-                        <option value="Utah">
-                        <option value="Vermont">
-                        <option value="Virginia">
-                        <option value="Washington">
-                        <option value="West Virginia">
-                        <option value="Wisconsin">
-                        <option value="Wyoming">
+ <!--                   <input list="states" type="text" name="state" id="state" class="form-control input-sm" tabindex="6"
+                        value="{{ $contact->state ?? old('state') }}"> -->
+                        <select for="contact_edit_from" name="state" id="states" class="form-control input-sm" tabindex="6" >
+                        @php
+                            if(isset($contact->state))
+                                $state = $contact->state;
+                            else
+                                $state = 'no';
+                        @endphp
+                        <option></option>
+                        <!--us states--> 
+                        <optgroup id="us" label="US States">
+                            <option value="Alabama" @if($state == "Alabama") selected @endif>Alabama</option>
+                            <option value="Alaska" @if($state == "Alaska") selected @endif>Alaska</option>
+                            <option value="Arizona" @if($state == "Arizona") selected @endif>Arizona</option>
+                            <option value="California" @if($state == "California") selected @endif>California</option>
+                            <option value="Colorado" @if($state == "Colorado") selected @endif>Colorado</option>
+                            <option value="Delaware" @if($state == "Delaware") selected @endif>Delaware</option>
+                            <option value="Florida" @if($state == "Florida") selected @endif>Florida</option>
+                            <option value="Georgia" @if($state == "Georgia") selected @endif>Georgia</option>
+                            <option value="Hawaii" @if($state == "Hawaii") selected @endif>Hawaii</option>
+                            <option value="Idaho" @if($state == "Idaho") selected @endif>Idaho</option>
+                            <option value="Illinois" @if($state == "Illinois") selected @endif>Illinois</option>
+                            <option value="Indiana" @if($state == "Indiana") selected @endif>Indiana</option>
+                            <option value="Iowa" @if($state == "Iowa") selected @endif>Iowa</option>
+                            <option value="Kansas" @if($state == "Kansas") selected @endif>Kansas</option>
+                            <option value="Kentucky" @if($state == "Kentucky") selected @endif>Kentucky</option>
+                            <option value="Louisiana" @if($state == "Louisiana") selected @endif>Louisiana</option>
+                            <option value="Maine" @if($state == "Maine") selected @endif>Maine</option>
+                            <option value="Maryland" @if($state == "Maryland") selected @endif>Maryland</option>
+                            <option value="Massachusetts" @if($state == "Massachusetts") selected @endif>Massachusetts</option>
+                            <option value="Michigan" @if($state == "Michigan") selected @endif>Michigan</option>
+                            <option value="Minnesota" @if($state == "Minnesota") selected @endif>Minnesota</option>
+                            <option value="Mississippi" @if($state == "Mississippi") selected @endif>Mississippi</option>
+                            <option value="Missouri" @if($state == "Missouri") selected @endif>Missouri</option>
+                            <option value="Montana" @if($state == "Montana") selected @endif>Montana</option>
+                            <option value="Nebraska" @if($state == "Nebraska") selected @endif>Nebraska</option>
+                            <option value="Nevada" @if($state == "Nevada") selected @endif>Nevada</option>
+                            <option value="New Hampshire" @if($state == "New Hampshire") selected @endif>New Hampshire</option>
+                            <option value="New Jersey" @if($state == "New Jersey") selected @endif>New Jersey</option>
+                            <option value="New Mexico" @if($state == "New Mexico") selected @endif>New Jersey</option>
+                            <option value="New York" @if($state == "New York") selected @endif>New York</option>
+                            <option value="North Carolina" @if($state == "North Carolina") selected @endif>North Carolina</option>
+                            <option value="North Dakota" @if($state == "North Dakota") selected @endif>North Dakota</option>
+                            <option value="Ohio" @if($state == "Ohio") selected @endif>Ohio</option>
+                            <option value="Oklahoma" @if($state == "Oklahoma") selected @endif>Oklahoma</option>
+                            <option value="Oregon" @if($state == "Oregon") selected @endif>Oregon</option>
+                            <option value="Pennsylvania" @if($state == "Pennsylvania") selected @endif>Pennsylvania</option>
+                            <option value="Rhode Island" @if($state == "Rhode Island") selected @endif>Rhode Island</option>
+                            <option value="South Carolina" @if($state == "South Carolina") selected @endif>South Carolina</option>
+                            <option value="South Dakota" @if($state == "South Dakota") selected @endif>South Dakota</option>
+                            <option value="Tennessee" @if($state == "Tennessee") selected @endif>Tennessee</option>
+                            <option value="Texas" @if($state == "Texas") selected @endif>Texas</option>
+                            <option value="Utah" @if($state == "Utah") selected @endif>Utah</option>
+                            <option value="Vermont" @if($state == "Vermont") selected @endif>Vermont</option>
+                            <option value="Virginia" @if($state == "Virginia") selected @endif>Virginia</option>
+                            <option value="Washington" @if($state == "Washington") selected @endif>Washington</option>
+                            <option value="West Virginia" @if($state == "West Virginia") selected @endif>West Virginia</option>
+                            <option value="Wisconsin" @if($state == "Wisconsin") selected @endif>Wisconsin</option>
+                            <option value="Wyoming" @if($state == "Wyoming") selected @endif>Wyoming</option>
+                        </optgroup>                 
 
                         <!--canadian states-->
-                        <option value="Alberta">
-                        <option value="British Columbia ">
-                        <option value="Manitoba">
-                        <option value="New Brunswick">
-                        <option value="Newfoundland">
-                        <option value="Nova Scotia">
-                        <option value="Ontario">
-                        <option value="Prince Edward Island">
-                        <option value="Quebec">
-                        <option value="Saskatchewan">
-                    </datalist>                    
+                        <optgroup id="canada" label="Canadian States">
+                            <option value="Alberta" @if($state == "Alberta") selected @endif >Alberta</option>
+                            <option value="British Columbia" @if($state == "British Columbia") selected @endif>British Columbia</option>
+                            <option value="Manitoba" @if($state == "Manitoba") selected @endif>Manitoba</option>
+                            <option value="New Brunswick" @if($state == "New Brunswick") selected @endif>New Brunswick</option>
+                            <option value="Newfoundland" @if($state == "Newfoundland") selected @endif>Newfoundland</option>
+                            <option value="Nova Scotia" @if($state == "Nova Scotia") selected @endif>Nova Scotia</option>
+                            <option value="Ontario" @if($state == "Ontario") selected @endif>Ontario</option>
+                            <option value="Prince Edward Island" @if($state == "Prince Edward Island") selected @endif>Prince Edward Island</option>
+                            <option value="Quebec" @if($state == "Quebec") selected @endif>Quebec</option>
+                            <option value="Saskatchewan" @if($state == "Saskatchewan") selected @endif>Saskatchewan</option>
+                        </optgroup>
+
+                    </select>  
+                  
                 </td>
             </tr>
             <tr>
                 <td>Country:</td>
                 <td>   
-                    <input list="countries" type="text" name="country" id="country" class="form-control input-sm" tabindex="16"
+                    <input list="countries" type="text" name="country" id="country" class="form-control input-sm" tabindex="7"
                             value="{{ $contact->country ?? old('country') }}">  
                     <datalist id="countries">                        
                         <option value="Australia">
@@ -157,7 +169,7 @@
             <tr>
                 <td>Company Phone: </td>
                 <td>
-                    <input type="text" name="office_phone" id="office_phone" class="form-control input-sm" tabindex="13"
+                    <input type="text" name="office_phone" id="office_phone" class="form-control input-sm" tabindex="8"
                         value="{{ $contact->office_phone ?? old('office_phone') }}">
                 </td>
             </tr>
@@ -176,7 +188,7 @@
             <tr>
                 <td>Mobile phone Nr.1: </td>
                 <td>
-                    <input type="text" name="mobile_phone_a" id="mobile_phone_a" class="form-control input-sm" tabindex="7"
+                    <input type="text" name="mobile_phone_a" id="mobile_phone_a" class="form-control input-sm" tabindex="10"
                         value="{{ $contact->mobile_phone_a ?? old('mobile_phone_a') }}">
                     @error('mobile_phone_a')
                         <span class="invalid-feedback" role="alert">
@@ -188,7 +200,7 @@
             <tr>
                 <td>Mobile phone Nr.2: </td>
                 <td>
-                    <input type="text" name="mobile_phone_b" id="mobile_phone_b" class="form-control input-sm" tabindex="8"
+                    <input type="text" name="mobile_phone_b" id="mobile_phone_b" class="form-control input-sm" tabindex="11"
                         value="{{ $contact->mobile_phone_b ?? old('mobile_phone_b') }}">
                     @error('mobile_phone_b')
                         <span class="invalid-feedback" role="alert">
@@ -201,7 +213,7 @@
                 <td>Work E-mail: </td>
                 <td>
                     <span style="float:left;width:69%;">
-                        <input type="email" name="work_email" id="work_email" class="form-control input-sm" tabindex="5"
+                        <input type="email" name="work_email" id="work_email" class="form-control input-sm" tabindex="12"
                             value="{{ $contact->work_email ??  old('work_email') }}"></span>
                     <div id="work_js_verify" class="btn btn-sm verify-button disabled">Verify Email</div>
                     @error('work_email')
@@ -214,7 +226,7 @@
             <tr>
                 <td>Personal E-mail: </td>
                 <td>
-                    <span style="float:left;width:69%;"><input type="email" name="personal_email" id="personal_email" class="form-control input-sm" tabindex="6"
+                    <span style="float:left;width:69%;"><input type="email" name="personal_email" id="personal_email" class="form-control input-sm" tabindex="13"
                         value="{{ $contact->personal_email ?? old('personal_email') }}"></span>
                     <div id="personal_js_verify" class="btn btn-sm verify-button disabled">Verify Email</div>
                     @error('personal_email')
@@ -227,7 +239,7 @@
             <tr>
                 <td>Linkedin url </td>
                 <td>
-                    <input type="text" name="li" id="li" class="form-control input-sm" tabindex="8"
+                    <input type="text" name="li" id="li" class="form-control input-sm" tabindex="14"
                         value="{{ $contact->li ?? old('li') }}">
                     @error('li')
                         <span class="invalid-feedback" role="alert">
@@ -239,7 +251,7 @@
             <tr>
                 <td>Jeffcode: </td>
                 <td>
-                    <input type="text" name="jeffcode" id="jeffcode" class="form-control input-sm" tabindex="8"
+                    <input type="text" name="jeffcode" id="jeffcode" class="form-control input-sm" tabindex="15"
                         value="{{ $contact->jeffcode ?? old('jeffcode') }}">
                 </td>
             </tr>
@@ -249,19 +261,19 @@
                     Buyer for jeffscontacts.com:
                 </td>
                 <td>
-                    <input tabindex="20"
+                    <input tabindex="16"
                         type="checkbox"
                         name="ready"
                         id="ready"
-                        @if (isset($contact->ready) && $contact->ready == 1)
+                        @if ($contact->ready ?? old('ready'))
                             checked
                         @endif                   
                         /><br>
-                    <input tabindex="21"
+                    <input tabindex="17"
                         type="checkbox"
                         name="buyer"
                         id="buyer"
-                        @if (isset($contact->buyer) && $contact->buyer == 1)
+                        @if ($contact->buyer ?? old('buyer'))
                             checked
                         @endif                   
                         /><br>
@@ -270,7 +282,7 @@
             <tr>
                 <td>Notes: </td>
                 <td>
-                    <textarea rows="4" name="notes" id="notes" class="form-control input-sm" tabindex="23"
+                    <textarea rows="4" name="notes" id="notes" class="form-control input-sm" tabindex="18"
                             value="">{{ $contact->notes ?? old('notes') }}</textarea>
 
                 </td>
@@ -407,6 +419,17 @@ function condup(){
     }
 @endif
 
+$('#states').on('change', function() {
+    var selected = $("option:selected", this);
+    switch (selected.parent()[0].id ) {
+    case 'us':
+        $('#country').val("United States");
+        break;
+    case 'canada':
+        $('#country').val("Canada");
+        break;
+    }
+});
 
     document.getElementById("work_js_verify").onclick = function() {verify_email()};
 
