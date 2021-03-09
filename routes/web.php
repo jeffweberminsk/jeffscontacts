@@ -20,7 +20,7 @@ use App\Models\User;
 */
 
 
-//employee subdomain routse unaccesible to regular users 
+//the user must be authenicated in order to access ADMIN. This command will verify that the user has privileges to use ADMiN. 
 Route::group(['domain' => 'employee.jeffscontacts.test', 'middleware' => ['auth', 'employee']], function () {
     
 Route::get('/', function () {
@@ -172,7 +172,7 @@ Route::group(['prefix' => 'database'], function () {
                     'job' => $request ->input('job'),
                     'company' => $request ->input('company'),
                     'city' => $request ->input('city'),
-                    'state' => $request ->input('state'),
+                    'state' => $request->state,
                     'country' => $request ->input('country'),
                     'office_phone' => $request ->input('office_phone'),
                     'direct_phone' => $request ->input('direct_phone'),
@@ -413,7 +413,7 @@ Route::group(['prefix' => 'users',], function () {
 
 //show home page
 Route::get('/', function () {
-    return view('main.home');
+    return view('main.search');
 });
 
 Route::get('/plans', function () {
@@ -424,8 +424,34 @@ Route::get('/user', function () {
     return view('main.user');
 });
 
-Route::get('/search', function () {
-    return view('main.search');
+Route::get('/search', function (Request $request) {
+    $query = Contact::query();
+    //selecting what data we need to send
+    $query = $query->select(['id','first_name','last_name','work_email','company','personal_email', 'photo']);
+    
+    //setting search parametrs
+    if($value = $request->input('job'))
+        $query = $query->where('job','like', '%'.$value.'%');
+    if($value = $request->input('company'))
+        $query = $query->where('company','like', '%'.$value.'%');
+    if($value = $request->input('city'))
+        $query = $query->where('city','like', '%'.$value.'%');
+    if($value = $request->input('country'))
+        $query = $query->where('country','like', '%'.$value.'%');
+    if($value = $request->input('jeffcode'))
+        $query = $query->where('jeffcode','like', '%'.$value.'%');
+    if($value = $request->input('name')){
+        foreach(explode(" ", $value) as $word )            
+            $query = $query->where(function ($query) use ($word) {
+                $query->where('first_name','like', '%'.$word.'%')
+                ->orWhere('last_name','like', '%'.$word.'%');  
+            });  
+    }
+
+    //using paginate to auto divide resolts into groups of 20
+    $results = $query->paginate(20);
+
+    return view('main.search', ['results' => $results]);
 });
 
 Route::get('/contact', function () {
