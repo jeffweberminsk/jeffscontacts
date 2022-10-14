@@ -35,10 +35,21 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                
+                                @isset($not_admin)
+                                    <div style="display: flex; align-items: center;" class="login_password">
+                                        <input type="checkbox" name="remember" id="remember" style="width: auto;">
+                                        <label for="remember" >Remember me</label>
+                                    </div>
+                                @endisset
                             </div>
                             <div class="login_buttons">
                                 <button type="submit" class="login_button">Enter</button>                          
                             </div>
+                            <br>
+                            @isset($not_admin)
+                                <a href="{{ route('password.request') }}">Forgot password?</a>
+                            @endisset
                         </form> 
                     </div>
                 </div>         

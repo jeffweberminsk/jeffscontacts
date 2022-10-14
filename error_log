@@ -1,0 +1,1 @@
+[12-Mar-2021 08:59:25 UTC] PHP Fatal error:  Can't use method return value in write context in /home/jeffktga/jeffscontacts/database/migrations/2021_03_01_105736_create_contacts_table.php on line 24

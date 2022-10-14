@@ -16,9 +16,18 @@
                 @if(auth()->user()->create) create duplicate @endif
                 @if(auth()->user()->remove) delete @endif
             </h4>
+        @endif     
+        @if(auth()->user()->edit || auth()->user()->create)
+        <a href = "{{ url('company') }}">
+            <div class="btn btn-sm ">Edit companies</div>
+        </a>
+        <a href = "{{ url('jeffcode') }}">
+            <div class="btn btn-sm ">Edit jeffcodes</div>
+        </a>
+        <a href = "{{ url('job_title') }}">
+            <div class="btn btn-sm ">Edit job titles</div>
+        </a>
         @endif
-        
-
     </div>
 </div>
 @endsection

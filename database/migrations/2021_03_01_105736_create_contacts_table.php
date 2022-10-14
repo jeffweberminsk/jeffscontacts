@@ -16,24 +16,27 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('first_name',25)->nullable();
-            $table->string('last_name',25)->nullable();
-            $table->string('job',50)->nullable();
-            $table->string('work_email',30)->unique()->nullable();
-            $table->string('personal_email',30)->unique()->nullable();
-            $table->string('mobile_phone_a',20)->unique()->nullable();
-            $table->string('mobile_phone_b',20)->unique()->nullable();
+            $table->string('last_name',40)->nullable();
+            $table->string('job')->nullable();
+            $table->string('company')->nullable();
+            $table->string('sub_company')->nullable();       
+            // $csw->collation = 'utf8_bin'; to make column case sensetive
+            $csw = $table->string('work_email',50)->unique()->nullable();
+            $csw->collation = 'utf8_bin';
+            $table->string('personal_email',50)->nullable();
+            $table->string('mobile_phone_a',20)->nullable();
+            $table->string('mobile_phone_b',20)->nullable();
             $table->string('direct_phone',20)->unique()->nullable();
             $table->string('office_phone',20)->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('photo')->default('user.png');
-            $table->string('li')->unique()->nullable();
+            $table->string('li')->nullable();
             $table->string('jeffcode')->nullable();
             $table->boolean('ready')->default(0);
             $table->boolean('buyer')->default(0);
             $table->date('last_check')->nullable();
-            $table->string('company',50)->nullable();
             $table->text('notes')->nullable();
         });
     }
