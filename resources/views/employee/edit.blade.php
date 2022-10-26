@@ -304,7 +304,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Jeffcodes: </td>
+                                    <td>Jeffscodes: </td>
                                     <td>
                     <span id="codes_area" style="float:left;width:69%;"> 
                     @if (isset($contact))
