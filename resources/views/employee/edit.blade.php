@@ -157,7 +157,7 @@
                                                 <option value="Wisconsin" @if($state == "Wisconsin") selected @endif>Wisconsin</option>
                                                 <option value="Wyoming" @if($state == "Wyoming") selected @endif>Wyoming</option>
                                             </optgroup>
-                                            <optgroup id="canada" label="Canadian Province">
+                                            <optgroup id="canada" label="Canadian Provinces">
                                                 <option value="Alberta" @if($state == "Alberta") selected @endif >Alberta</option>
                                                 <option value="British Columbia" @if($state == "British Columbia") selected @endif>British Columbia</option>
                                                 <option value="Manitoba" @if($state == "Manitoba") selected @endif>Manitoba</option>
